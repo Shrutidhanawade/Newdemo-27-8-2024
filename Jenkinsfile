@@ -8,7 +8,9 @@ pipeline {
     stages {
         stage('deploy project') {
             steps {
+                 sh 'echo $JAVA_HOME'
                 sh '''
+                 
                 java --version
                 mvn --version
                
