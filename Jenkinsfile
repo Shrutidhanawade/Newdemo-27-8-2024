@@ -11,7 +11,7 @@ pipeline {
                 sh '''
                mvn clean install 
                mvn deploy
-            "
+            '''
 }
 }
 
