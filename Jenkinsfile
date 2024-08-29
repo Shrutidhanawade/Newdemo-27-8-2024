@@ -9,8 +9,9 @@ pipeline {
         stage('deploy project') {
             steps {
                 sh '''
-                mvn --version
                 java --version
+                mvn --version
+               
                mvn clean install 
                mvn deploy
             '''
