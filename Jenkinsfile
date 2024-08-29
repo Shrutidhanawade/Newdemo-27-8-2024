@@ -8,6 +8,7 @@ pipeline {
     stages {
         stage('deploy project') {
             steps {
+                 withEnv(["JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64"]) {
                  sh 'echo $JAVA_HOME'
                 sh '''
                  
@@ -17,6 +18,7 @@ pipeline {
                mvn clean install 
                mvn deploy
             '''
+                 }
 }
 }
 
