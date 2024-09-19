@@ -29,7 +29,6 @@ steps:
 # Build and test Java code in RepoA using Maven
 - script: |
     echo "Building RepoB"
-    cd $(Build.SourcesDirectory)/RepoA
     
     # Compile Java code
     javac HelloWorld.java
@@ -38,7 +37,6 @@ steps:
 # Build and test Java code in RepoB using Maven
 - script: |
     echo "Building RepoB"
-    cd $(Build.SourcesDirectory)/RepoB
     
     # Compile Java code
     javac HelloWorld.java
