@@ -29,8 +29,8 @@ steps:
 # Build and test Java code in RepoA using Maven
 - script: |
     echo "Building RepoB"
-    cd $(Build.SourcesDirectory)/RepoA
-
+    cd $(Build.SourcesDirectory)/RepoA/Newdemo-27-8-2024/
+     javac HelloWorld.java
     
     echo "Listing files in RepoA:"
     ls -la
@@ -39,7 +39,8 @@ steps:
 # Build and test Java code in RepoB using Maven
 - script: |
     echo "Building RepoB"
-    cd $(Build.SourcesDirectory)/RepoB
+    cd $(Build.SourcesDirectory)/RepoB/Newdemo-27-8-2024/
+    javac HelloWorld.java
     echo "Listing files in RepoB:"
     ls -la
   displayName: 'Build and Test RepoB'
