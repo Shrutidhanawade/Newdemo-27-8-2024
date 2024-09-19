@@ -4,7 +4,7 @@ trigger:
   branches:
     include:
       - main
-      - pip1
+      
 
 pool:
   name: default  # Use a valid VM image like 'ubuntu-latest'
@@ -13,8 +13,8 @@ resources:
   repositories:
     - repository: RepoB
       type: github
-      name: Shrutidhanawade/Newdemo-27-8-2024  # Correct GitHub repository name (org/repo)
-      ref: pip1  # Branch to pull from RepoB
+      name: Shrutidhanawade/dotnet  # Correct GitHub repository name (org/repo)
+      ref: main  # Branch to pull from RepoB
       endpoint: Shrutidhanawade  # GitHub service connection name
 
 steps:
@@ -35,12 +35,16 @@ steps:
     echo "Listing files in RepoA:"
     ls -la
   displayName: 'Build and Test RepoA'
-
+- task: UseDotNet@2
+  inputs:
+    packageType: 'sdk'
+    version: '7.x'
+    installationPath: $(Agent.ToolsDirectory)/dotnet
 # Build and test Java code in RepoB using Maven
 - script: |
     echo "Building RepoB"
-    cd $(Build.SourcesDirectory)/Newdemo-27-8-2024/
-    javac HelloWorld.java
+    cd $(Build.SourcesDirectory)/dotnet/HelloWorldApp/
+    dotnet build HelloWorldApp.csproj --configuration Release
     echo "Listing files in RepoB:"
     ls -la
   displayName: 'Build and Test RepoB'
