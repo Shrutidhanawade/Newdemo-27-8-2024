@@ -7,46 +7,39 @@ trigger:
       - pip1
 
 pool:
-  name: default
+  name: default  # Use a valid VM image like 'ubuntu-latest'
 
-# Checkout both RepoA (primary) and RepoB (secondary)
 resources:
   repositories:
-    - repository:  git://Shrutidhanawade/Newdemo-27-8-2024@pip1   # Alias for the secondary GitHub repository
+    - repository: RepoB
       type: github
-      name: Newdemo-27-8-2024  # Replace with your GitHub organization and repo name
-      ref: main  # Branch to pull from RepoB
-      endpoint: Shrutidhanawade  # GitHub service connection for authentication
+      name: Shrutidhanawade/Newdemo-27-8-2024  # Correct GitHub repository name (org/repo)
+      ref: pip1  # Branch to pull from RepoB
+      endpoint: Shrutidhanawade  # GitHub service connection name
 
 steps:
 # Checkout the primary repository (RepoA)
-- checkout: git://Shrutidhanawade/Newdemo-27-8-2024@main
+- checkout: self
   displayName: 'Checkout RepoA (Primary Repository)'
 
 # Checkout the secondary repository (RepoB)
-- checkout: git://Shrutidhanawade/Newdemo-27-8-2024@pip1
+- checkout: RepoB
   displayName: 'Checkout RepoB (Secondary Repository)'
 
 # Build and test Java code in RepoA using Maven
-
-- task: CmdLine@2
-  inputs:
-    script: |
-      echo Write your commands here
-      
-      echo Hello world
-       java HelloWorld.java
+- script: |
+    echo "Building RepoB"
+    cd $(Build.SourcesDirectory)/RepoA
+    
+    # Compile Java code
+    javac HelloWorld.java
   displayName: 'Build and Test RepoA'
 
 # Build and test Java code in RepoB using Maven
 - script: |
     echo "Building RepoB"
-
-- task: CmdLine@2
-  inputs:
-    script: |
-      echo Write your commands here
-      echo Hello world
-       java HelloWorld.java
+    cd $(Build.SourcesDirectory)/RepoB
+    
+    # Compile Java code
+    javac HelloWorld.java
   displayName: 'Build and Test RepoB'
-
