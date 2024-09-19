@@ -12,9 +12,9 @@ pool:
 # Checkout both RepoA (primary) and RepoB (secondary)
 resources:
   repositories:
-    - repository: RepoB   # Alias for the secondary GitHub repository
+    - repository:  git://Shrutidhanawade/Newdemo-27-8-2024@pip1   # Alias for the secondary GitHub repository
       type: github
-      name: Shrutidhanawade/Newdemo-27-8-2024  # Replace with your GitHub organization and repo name
+      name: Newdemo-27-8-2024  # Replace with your GitHub organization and repo name
       ref: main  # Branch to pull from RepoB
       endpoint: Shrutidhanawade  # GitHub service connection for authentication
 
