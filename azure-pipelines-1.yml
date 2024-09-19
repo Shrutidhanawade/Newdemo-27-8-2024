@@ -1,0 +1,47 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+  branches:
+    include:
+      - pip1
+      - main
+
+pr:
+  branches:
+    include:
+      - pip1
+      - main
+
+pool:
+  name: default
+
+schedules:
+  - cron: "* * * * *" 
+    displayName: daily build
+    branches:
+      include:
+        - pip1
+        - main
+
+stages:
+- stage: Build
+  jobs:
+  - job: BuildJob
+    steps:
+    - script: echo "Building the project..."
+
+- stage: Test
+  jobs:
+  - job: TestJob
+    steps:
+    - script: echo "Running tests..."
+
+- stage: Deploy
+  jobs:
+  - job: DeployJob
+    condition: eq(variables['Build.SourceBranch'], 'refs/heads/main')
+    steps:
+    - script: echo "Deploying to production..."
