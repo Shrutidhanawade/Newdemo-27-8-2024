@@ -1,0 +1,52 @@
+# azure-pipelines.yml in RepoA (Primary Repository)
+
+trigger:
+  branches:
+    include:
+      - main
+      - pip2
+
+pool:
+  name: default
+
+# Checkout both RepoA (primary) and RepoB (secondary)
+resources:
+  repositories:
+    - repository: RepoB   # Alias for the secondary GitHub repository
+      type: github
+      name: https://github.com/Shrutidhanawade/Newdemo-27-8-2024.git  # Replace with your GitHub organization and repo name
+      ref: main  # Branch to pull from RepoB
+      endpoint: Shrutidhanawade  # GitHub service connection for authentication
+
+steps:
+# Checkout the primary repository (RepoA)
+- checkout: https://github.com/Shrutidhanawade/Newdemo-27-8-2024.git
+  displayName: 'Checkout RepoA (Primary Repository)'
+
+# Checkout the secondary repository (RepoB)
+- checkout: https://github.com/Shrutidhanawade/Newdemo-27-8-2024.git
+  displayName: 'Checkout RepoB (Secondary Repository)'
+
+# Build and test Java code in RepoA using Maven
+
+- task: CmdLine@2
+  inputs:
+    script: |
+      echo Write your commands here
+      
+      echo Hello world
+       java HelloWorld.java
+  displayName: 'Build and Test RepoA'
+
+# Build and test Java code in RepoB using Maven
+- script: |
+    echo "Building RepoB"
+
+- task: CmdLine@2
+  inputs:
+    script: |
+      echo Write your commands here
+      echo Hello world
+       java HelloWorld.java
+  displayName: 'Build and Test RepoB'
+
