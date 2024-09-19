@@ -18,13 +18,13 @@ pr:
 pool:
   name: default
 
-schedules:
-  - cron: "* * * * *" 
-    displayName: daily build
-    branches:
-      include:
-        - pip1
-        - main
+#schedules:
+#  - cron: "* * 0 * *" 
+#    displayName: daily build
+#    branches:
+#      include:
+#        - pip1
+#        - main
 
 stages:
 - stage: Build
