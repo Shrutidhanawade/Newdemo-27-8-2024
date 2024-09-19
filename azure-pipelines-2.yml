@@ -4,7 +4,7 @@ trigger:
   branches:
     include:
       - main
-      - pip2
+      - pip1
 
 pool:
   name: default
@@ -14,17 +14,17 @@ resources:
   repositories:
     - repository: RepoB   # Alias for the secondary GitHub repository
       type: github
-      name: https://github.com/Shrutidhanawade/Newdemo-27-8-2024.git  # Replace with your GitHub organization and repo name
+      name: git://Shrutidhanawade/Newdemo-27-8-2024  # Replace with your GitHub organization and repo name
       ref: main  # Branch to pull from RepoB
       endpoint: Shrutidhanawade  # GitHub service connection for authentication
 
 steps:
 # Checkout the primary repository (RepoA)
-- checkout: https://github.com/Shrutidhanawade/Newdemo-27-8-2024.git
+- checkout: git://Shrutidhanawade/Newdemo-27-8-2024@main
   displayName: 'Checkout RepoA (Primary Repository)'
 
 # Checkout the secondary repository (RepoB)
-- checkout: https://github.com/Shrutidhanawade/Newdemo-27-8-2024.git
+- checkout: git://Shrutidhanawade/Newdemo-27-8-2024@pip1
   displayName: 'Checkout RepoB (Secondary Repository)'
 
 # Build and test Java code in RepoA using Maven
